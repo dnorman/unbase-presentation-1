@@ -1,5 +1,8 @@
 
-## Unbase - A concept for next generation computing
+### Unbase
+#### A concept for next generation computing
+
+
 
 Daniel Norman  
 CTO of güdTECH  
@@ -8,41 +11,50 @@ Twitter: @DreamingInCode
 
 ---
 
-# Motivation
+## Motivation
 
-* We write software for retailers with high order volume, and large warehouses.
-* Our customers are totally reliant on us. We are their lifeblood.
-* Some use our software nearly 24 hours per day.
+* Software for retailers with high order volume - large warehouses.
+* Our customers are totally reliant on the system
+* Some use our software for 3 shifts - nearly 24 hours per day
 * Thousands of cycles per day, per user
 * Low application latency is a major part of our value proposition
 * Uptime is *critical*
 
 ---
 
-# Caution
+# Caution!
 
-* I am not a physicist
-* I am not a mathematician
-* Unbase is at present total vaporware
-* This talk may damage your brain
-
-### *You have been warned*
+* I am not a physicist <!-- .element: class="fragment" data-fragment-index="1" -->
+* I am not a mathematician <!-- .element: class="fragment" data-fragment-index="2" -->
+* Unbase is presently total vaporware <!-- .element: class="fragment" data-fragment-index="3" -->
+* This talk may damage your brain <!-- .element: class="fragment" data-fragment-index="4" -->  
+   
+   
+### *You have been warned* <!-- .element: class="fragment" data-fragment-index="5" -->
 
 ---
 
-# Availability
-What does it even mean??
+## Please Wait <!-- .element: class="fragment" data-fragment-index="1" -->
 
-* CAP theorem is undeniably, factually correct, _IF_ you accept Gilbert and Lynch's adorable definitions for C, A, and P
+<img src="spinning-wheel.gif" style="border:none;background: transparent">
 
-* What exactly is Consistency? (They assume Linearizability)
+### Your call will be answered in the order received <!-- .element: class="fragment" data-fragment-index="2" -->
 
-* How many seconds can you wait before I'm no longer considered [A]vailable?
+---
 
-* If a data packet retransmits after a fiber cut is fixed, was it ever really a Partition? How is this different from congestion, or light travel time?
+###  What the heck does "Availabile" mean?
 
+**CAP theorem is undeniably correct**  <!-- .element: class="fragment" data-fragment-index="1" -->  
 
-_See Martin Kleppmann's excellent paper for extra CAP theorem debunkitude_
+...IF you accept Gilbert and Lynch's definitions of C, A, and P  <!-- .element: class="fragment" data-fragment-index="2" -->   
+
+* What exactly is "Consistency"? - They assume Linearizability<!-- .element: class="fragment" data-fragment-index="3" -->
+* How long can I make you wait before I'm no longer considered Available? - 30 seconds? 5 minutes? an hour? <!-- .element: class="fragment" data-fragment-index="4" -->
+* Retransmit after a fiber cut is fixed, was it really a Partition? <!-- .element: class="fragment" data-fragment-index="5" -->
+
+---
+
+(Check out Martin Kleppmann's excellent paper debunking CAP Theorem)
 
 ---
 
@@ -154,7 +166,7 @@ You must design your human systems every bit as much as your design your compute
 * Hire a large ops team - How many people per continent?
 
 
-# Option B - Write something new
+# Option B - Have the software do the work
 
 * Novel engineering efforts are expensive
 * Finding bugs in decentralized systems is a big challenge
