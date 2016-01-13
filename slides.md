@@ -64,33 +64,39 @@ Twitter: @DreamingInCode
 
 ## What is Linearizability?
 
-Linearizability / Serializability is the most common consistency model implemented by relational databases.
+The most common consistency model implemented by relational databases.
 
-* Determinism by total order of events
+* Determinism via total event ordering
 * Sequential numbers
 * Easiest way to model causality
+* Every RDBMS under the sun uses it
 
 But there's a problem...
 
 ---
 
-## Physics - Part 1
+### Physics
 
 * An up-to-date list is an exclusive resource
-* Exclusive resources can only only exist in a single point in space.
+* Exclusive resources can only only exist in a single point in space
+* Distances between things in space is nonzero!
+* Time does not actually exist, only causality
+* Light travels at the speed of causality
 * No exceptions!
-* Distances between things is nonzero!
 
 ---
 
-## The great disconnect - Part 1
+### Whoops
 
-* Computer scientists like to pretend that space does not exist
+Computer scientists like to pretend that space does not exist, and that simultineity is a thing.
+
+* Simultineity does not exist!
+* UTC is a convention, it is not simultineity
 * Physicists are not optimistic about the invention of an ansible
 
 ---
 
-## Why do we CS ilk love Linearizability?
+Why do we CS ilk love Linearizability?
 
  * Easy to reason about
  * Easy to write formal proofs
@@ -99,32 +105,26 @@ But there's a problem...
 
 But there's another way...
 
+---
+
 # The Dark Side
 
 "Light thinks it travels faster than anything but it is wrong. No matter how fast light travels, it finds the darkness has always got there first, and is waiting for it."  
 -Terry Pratchett
 
----
-
-## Physics - Part 2
-
-* There is distance between all stuff
-* Time does not exist (only causality)
-* _Simultineity does not exist_
-** UTC is a convention - not a fact
 
 ---
 
 ![Light Cones](World_line.svg)
 
- *Of course, it turns out there's actually no such thing as time, or the present, so this is a simplified model. Ask a physicist.*
+<p style="font-size:.5em">Of course, it turns out there's actually no such thing as time, or the present.<br>This is a simplified model. Ask a physicist.</p>
 
 
 ---
 
-# The enemy of my enemy
+## The enemy of my enemy
 
-### Eventual consistency
+#### Eventual consistency
 
 * No coordination (Shared-nothing)
 * No freshness guarantees
@@ -143,82 +143,102 @@ But there's another way...
 ##### Eventual Consustency - The bad:
 
 * Stale data is virtually guaranteed
-* You get to write your own consistency model as an overlay
+* You get to implement your own consistency model as an overlay
 * Your users dislike it when their data is all wunky
 * Using a wallclock to resolve conflicts is a recipe for **PAIN**
+  <p style="font-size:.5em">*Ahem, Cassandra*</p>
 
 ---
 
-# What timezone is it on Mars?
+### What timezone is it on Mars?
 
-* Wallclocks are BAD
-* CS does not understand time
-* Light cones, CRDTs, and Causality (oh my!)
-* Business implications of a new approach
+<p style="font-size:.5em">Mars and Earth differ from LA and Chicago only by degree. There is nothing special about being on the surface of earth which magically conjures simultineity.<p>
 
 ---
-
-# And now, for something completely different
 
 <img src="And-now.jpg" style="border:none">
 
-
-# A self-organizing approach
-
-* No such thing as a "Server" or "Client"
- * Just big node, little node - Big iron vs iWatch
- * Just more privileged, or less privileged - Admin vs Subordinate
- * More memory, or less memory - 1Mb vs 100Tb
- * More ability, or less ability - x86 vs arm
-* Each node is an empty vessel
-* No a priori resource planning ( human or otherwise )
-* Code is data
-* All nodes may perform any function of which they are capable.
-* Balancing via back-pressure signals, provided when memory, cpu, or network quotas are near
-
 ---
-# Business implications
 
-### Like it or not, your system is a human/machine hybrid
-You must design your human systems every bit as much as your design your computer systems.
+## It's business time
 
+Like it or not, your business is a human/machine hybrid.
+
+* What fraction is machine? <!-- .element: class="fragment" data-fragment-index="1" -->
+* What fraction is human?   <!-- .element: class="fragment" data-fragment-index="2" -->
+* How much does it cost to train the machines? <!-- .element: class="fragment" data-fragment-index="3" -->
+* How much doest it cost to hire and train the humans? <!-- .element: class="fragment" data-fragment-index="4" -->
 
 ---
 
-# The gauntlet:
-* Deploy your system on six continents
-* Provide 100% Uptime (even five nines is a huge challenge)  
- *assuming the UI-attached node is working
-* Provide a screaming fast user experience
-
+## The gauntlet:
+* Deploy the system on six continents <!-- .element: class="fragment" data-fragment-index="1" -->
+* Provide nine-nines uptime <!-- .element: class="fragment" data-fragment-index="2" -->
+* Provide a screaming fast user experience <!-- .element: class="fragment" data-fragment-index="3" -->
+* Save money on staffing <!-- .element: class="fragment" data-fragment-index="4" -->
+* Save money on hardware <!-- .element: class="fragment" data-fragment-index="5" -->
+* Try to avoid common mode failures <!-- .element: class="fragment" data-fragment-index="6" -->
 
 ---
 
-# Option A - Hire and train a lot of people
+#### Option A - Hire and train a lot of people
 
-* Use traditional software design methodology
-* Employ standard linearizable/serializable RDBMS databases
-* Hire humans to manage shards, respond to long term load fluctuation
-* Deploy one datacenter per continent
-* Design automated fallback plans - Write loots of code to cope with unpredictable scenarios
-* Design human fallback plans - Who fixes a broken DB, NTP, etc?
-* Hire a large ops team - How many people per continent?
+* Traditional software design methodology <!-- .element: class="fragment" data-fragment-index="1" -->
+* Standard linearizable/serializable RDBMS databases <!-- .element: class="fragment" data-fragment-index="2" -->
+* Have humans manage sharding, resource planning, allocation <!-- .element: class="fragment" data-fragment-index="3" -->
+* One datacenter per continent <!-- .element: class="fragment" data-fragment-index="4" -->
+* Design automated fallback plans - Write loots of code to cope with unpredictable scenarios <!-- .element: class="fragment" data-fragment-index="5" -->
+* Design human fallback plans - Who fixes a broken DB, NTP, etc? <!-- .element: class="fragment" data-fragment-index="6" -->
+* Hire a large ops team - How many people per continent? <!-- .element: class="fragment" data-fragment-index="7" -->
 
+---
 
-# Option B - Have the software do the work
+#### Option B - Have the software do the work
 
+* More work up front, but deferred payoff
 * Novel engineering efforts are expensive
 * Finding bugs in decentralized systems is a big challenge
-*
-
 
 
 ---
 
+### A self-organizing approach
 
-* Projection over Mutation
-* Pressure over planning
-* policy definition/enforcement over implementation ( define it, then enforce the definition, don't define the policy in human systems )
-* Capacity over assignment
-* locality above centrality
-* autonomy over coordination
+* No such thing as a "Server" or "Client" <!-- .element: class="fragment" data-fragment-index="1" -->
+ * Just big node, little node - Big iron vs iWatch <!-- .element: class="fragment" data-fragment-index="2" -->
+ * Just more privileged, or less privileged - Admin vs Subordinate <!-- .element: class="fragment" data-fragment-index="3" -->
+ * More memory, or less memory - 1Mb vs 100Tb <!-- .element: class="fragment" data-fragment-index="4" -->
+ * More ability, or less ability - x86 vs arm <!-- .element: class="fragment" data-fragment-index="5" -->
+* No a priori resource planning ( human or otherwise ) <!-- .element: class="fragment" data-fragment-index="6" -->
+* Code is just data <!-- .element: class="fragment" data-fragment-index="7" -->
+* All nodes may perform any function of which they are capable. <!-- .element: class="fragment" data-fragment-index="8" -->
+* Balancing via back-pressure signals, provided when memory, cpu, or network quotas are near <!-- .element: class="fragment" data-fragment-index="9" -->
+
+
+---
+
+#### All nodes are equal:
+<img src="unbase-model.png" style="width:100%">
+
+---
+
+## Design goals:
+
+* Everything is an immutable message <!-- .element: class="fragment" data-fragment-index="1" -->
+* Immutable messages are easy to replicate <!-- .element: class="fragment" data-fragment-index="2" -->
+* Only coordinate for actually exclusive resources <!-- .element: class="fragment" data-fragment-index="3" -->
+* Project state, don't mutate it <!-- .element: class="fragment" data-fragment-index="4" -->
+* Pressurize resources, don't plan them <!-- .element: class="fragment" data-fragment-index="5" -->
+* Systematize policy enforcement <!-- .element: class="fragment" data-fragment-index="6" -->
+* Locality above centrality <!-- .element: class="fragment" data-fragment-index="7" -->
+
+---
+
+### One possible implementation:
+
+<img src="causality.png" style="width:100%">
+
+
+---
+
+### Discuss!
